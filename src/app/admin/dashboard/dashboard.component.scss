@@ -1,0 +1,338 @@
+.admin-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--primary-bg);
+  
+  .admin-sidebar {
+    width: 250px;
+    background-color: var(--secondary-bg);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    
+    .admin-logo {
+      padding: 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      
+      h2 {
+        margin: 0;
+        font-size: 2rem;
+        background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
+    
+    .admin-nav {
+      flex-grow: 1;
+      padding: 1.5rem 0;
+      
+      .nav-item {
+        display: flex;
+        align-items: center;
+        padding: 0.8rem 1.5rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        
+        svg {
+          margin-right: 0.8rem;
+        }
+        
+        &:hover, &.active {
+          background-color: rgba(98, 0, 238, 0.1);
+          color: var(--primary-accent);
+        }
+      }
+    }
+    
+    .admin-footer {
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      
+      .nav-item {
+        display: flex;
+        align-items: center;
+        padding: 0.8rem 1.5rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        
+        svg {
+          margin-right: 0.8rem;
+        }
+        
+        &:hover {
+          background-color: rgba(98, 0, 238, 0.1);
+          color: var(--primary-accent);
+        }
+        
+        &.logout {
+          background: none;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+          text-align: left;
+          font-family: 'Poppins', sans-serif;
+          font-size: 1rem;
+          
+          &:hover {
+            color: var(--error-color);
+            background-color: rgba(244, 67, 54, 0.1);
+            
+            svg {
+              color: var(--error-color);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .admin-content {
+    flex-grow: 1;
+    margin-left: 250px;
+    padding: 2rem;
+    
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      
+      h1 {
+        margin: 0;
+        color: var(--text-primary);
+      }
+      
+      .admin-user {
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+    }
+    
+    .dashboard-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      
+      .stat-card {
+        background-color: var(--secondary-bg);
+        border-radius: 8px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-icon {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 1rem;
+          
+          &.projects {
+            background-color: rgba(98, 0, 238, 0.1);
+            
+            svg {
+              color: var(--primary-accent);
+            }
+          }
+          
+          &.published {
+            background-color: rgba(76, 175, 80, 0.1);
+            
+            svg {
+              color: var(--success-color);
+            }
+          }
+          
+          &.drafts {
+            background-color: rgba(255, 152, 0, 0.1);
+            
+            svg {
+              color: var(--warning-color);
+            }
+          }
+          
+          &.messages {
+            background-color: rgba(3, 218, 198, 0.1);
+            
+            svg {
+              color: var(--secondary-accent);
+            }
+          }
+        }
+        
+        .stat-info {
+          h3 {
+            font-size: 2rem;
+            margin: 0 0 0.5rem;
+            color: var(--text-primary);
+          }
+          
+          p {
+            margin: 0;
+            color: var(--text-secondary);
+          }
+          
+          .badge {
+            display: inline-block;
+            background-color: var(--primary-accent);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 30px;
+            margin-top: 0.5rem;
+          }
+        }
+      }
+    }
+    
+    .dashboard-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      
+      .dashboard-section {
+        background-color: var(--secondary-bg);
+        border-radius: 8px;
+        padding: 1.5rem;
+        
+        .section-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1.5rem;
+          
+          h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+          }
+          
+          .view-all {
+            color: var(--primary-accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+        
+        .table-responsive {
+          overflow-x: auto;
+          
+          .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            
+            th, td {
+              padding: 1rem;
+              text-align: left;
+            }
+            
+            th {
+              color: var(--text-secondary);
+              font-weight: 500;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            td {
+              color: var(--text-primary);
+              border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            
+            tr {
+              &:last-child {
+                td {
+                  border-bottom: none;
+                }
+              }
+              
+              &.unread {
+                background-color: rgba(98, 0, 238, 0.05);
+              }
+            }
+            
+            .status-badge {
+              display: inline-block;
+              padding: 0.3rem 0.6rem;
+              border-radius: 30px;
+              font-size: 0.8rem;
+              font-weight: 500;
+              
+              &.published {
+                background-color: rgba(76, 175, 80, 0.1);
+                color: var(--success-color);
+              }
+              
+              &.draft {
+                background-color: rgba(255, 152, 0, 0.1);
+                color: var(--warning-color);
+              }
+              
+              &.unread {
+                background-color: rgba(98, 0, 238, 0.1);
+                color: var(--primary-accent);
+              }
+              
+              &.read {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: var(--text-secondary);
+              }
+            }
+            
+            .action-buttons {
+              display: flex;
+              gap: 0.5rem;
+              
+              .action-btn {
+                width: 32px;
+                height: 32px;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                background: none;
+                border: none;
+                cursor: pointer;
+                
+                &.edit {
+                  color: var(--primary-accent);
+                  
+                  &:hover {
+                    background-color: rgba(98, 0, 238, 0.1);
+                  }
+                }
+                
+                &.delete {
+                  color: var(--error-color);
+                  
+                  &:hover {
+                    background-color: rgba(244, 67, 54, 0.1);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

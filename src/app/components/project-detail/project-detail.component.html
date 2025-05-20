@@ -1,0 +1,113 @@
+<section class="project-detail-section section">
+  <div class="container" *ngIf="project && !errorMessage">
+    <div class="project-header">
+      <h2 class="project-title">{{ project.title }}</h2>
+      <div class="project-technologies">
+        <span class="tech-badge" *ngFor="let tech of project.technologies">{{ tech }}</span>
+      </div>
+    </div>
+    
+    <div class="project-content">
+      <div class="project-image-container">
+        <div class="project-image">
+          <img *ngIf="project.image; else placeholder" [src]="getImageUrl(project.image)" alt="{{ project.title }}" (error)="handleImageError($event)">
+          <ng-template #placeholder>
+            <div class="image-placeholder">
+              <div class="placeholder-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+              </div>
+              <span>{{ project.title }}</span>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      
+      <div class="project-details">
+        <div class="project-section">
+          <h3>Project Overview</h3>
+          <p>{{ project.description }}</p>
+        </div>
+        
+        <div class="project-section">
+          <h3>Key Features</h3>
+          <ul class="features-list">
+            <li *ngFor="let feature of project.features">{{ feature }}</li>
+          </ul>
+        </div>
+        
+        <div class="project-section">
+          <h3>Technologies Used</h3>
+          <div class="technologies-grid">
+            <div class="technology-item" *ngFor="let tech of project.technologies">
+              <div class="technology-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <span>{{ tech }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-section">
+          <h3>Technical Challenges</h3>
+          <p>This section will detail the technical challenges faced during the development of this project and how they were overcome. This content will be populated from the API in the future.</p>
+        </div>
+        
+        <div class="project-actions">
+          <a [href]="project.liveDemo || ''" [class.disabled]="!project.liveDemo" class="btn btn-primary" target="_blank" [attr.aria-disabled]="!project.liveDemo">View Live Demo</a>
+          <a [href]="project.sourceCode || ''" [class.disabled]="!project.sourceCode" class="btn btn-outline" target="_blank" [attr.aria-disabled]="!project.sourceCode">View Source Code</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="project-navigation">
+      <a href="#" class="nav-link prev">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Previous Project
+      </a>
+      <a routerLink="/projects" class="nav-link all">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        All Projects
+      </a>
+      <a href="#" class="nav-link next">
+        Next Project
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+  </div>
+  
+  <div class="loading-container" *ngIf="loading">
+    <div class="loading-spinner"></div>
+    <p>Loading project details...</p>
+  </div>
+  
+  <div class="error-container" *ngIf="errorMessage && !loading">
+    <div class="error-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+    </div>
+    <h3>Error</h3>
+    <p>{{ errorMessage }}</p>
+    <a routerLink="/projects" class="btn btn-primary">Back to Projects</a>
+  </div>
+</section>
